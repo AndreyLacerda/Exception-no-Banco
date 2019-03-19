@@ -1,2 +1,3 @@
-# Teste-BancoSimples
-ExercÃ­cio de implementaÃ§Ã£o de classes e testes unitÃ¡rios do "Banco Simples" de LP1A3 // Andrey Camargo Lacerda // SP3013049
+# Projeto Simple Bank
+
+Este repositório contém um exemplo de uma aplicação simples em Java.
