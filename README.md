@@ -1,3 +1,3 @@
 # Projeto Simple Bank
 
-Este repositÛrio contÈm um exemplo de uma aplicaÁ„o simples em Java.
+Este reposit√≥rio cont√©m um exemplo de uma aplica√ß√£o simples em Java com exce√ß√µes.
