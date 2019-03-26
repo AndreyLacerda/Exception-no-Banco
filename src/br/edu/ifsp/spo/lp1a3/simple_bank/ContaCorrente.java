@@ -7,7 +7,12 @@ public class ContaCorrente extends Conta {
 	
 	public ContaCorrente(String titular, String numeroConta, double limite) {
 		super(titular, numeroConta);
-		this.limiteChequeEspecial = limite;
+		if (limite < 0) {
+			throw new LimiteMenorZeroException("Limite não pode ser menor que 0");
+		}
+		else {
+			this.limiteChequeEspecial = limite;
+		}
 	}
 	
 	public double getLimiteChequeEspecial() {
@@ -27,8 +32,15 @@ public class ContaCorrente extends Conta {
 	
 	@Override
 	public double sacar(double valor) {
-		valor = valor + (valor * 0.01);
-		super.sacar(valor);
-		return this.getSaldo();
+		
+		if (this.getSaldo() == 0) {
+			throw new SaldoZeroException("Saldo não pode ser igual a 0");
+		}
+		else {
+			valor = valor + (valor * 0.01);
+			super.sacar(valor);
+			return this.getSaldo();
+		}
+
 	}
 }

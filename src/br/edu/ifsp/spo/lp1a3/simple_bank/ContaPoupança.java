@@ -13,7 +13,12 @@ public class ContaPoupança extends Conta{
 	}
 
 	public static void setTaxaRendimento(double taxaRendimento) {
-		ContaPoupança.taxaRendimento = taxaRendimento;
+		if (taxaRendimento <= 0) {
+			throw new RendimentoMenorZeroException("Rendimento não pode ser igual a 0");
+		}
+		else {
+			ContaPoupança.taxaRendimento = taxaRendimento;
+		}
 	}
 	
 	public void aplicarRendimento() {
