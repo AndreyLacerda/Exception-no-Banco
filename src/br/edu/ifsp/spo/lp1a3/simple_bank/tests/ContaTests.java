@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import br.edu.ifsp.spo.lp1a3.simple_bank.Conta;
+import br.edu.ifsp.spo.lp1a3.simple_bank.NumeroContaException;
+import br.edu.ifsp.spo.lp1a3.simple_bank.SaldoZeroException;
+import br.edu.ifsp.spo.lp1a3.simple_bank.TitularNullException;
 
 class ContaTests {
 
@@ -56,10 +59,11 @@ class ContaTests {
 		double valor = 10;
 		
 		//2. Execução
+		conta.depositar(valor);
 		conta.sacar(valor);
 		
 		//3. Validação / Asserção
-		assertEquals(0-valor, conta.getSaldo());
+		assertEquals(0, conta.getSaldo());
 		
 	}
 	
@@ -71,10 +75,57 @@ class ContaTests {
 		double valor = 10;
 		
 		//2. Execução
+		conta.depositar(valor);
 		conta.transferirPara(outraConta, valor);
 		
 		//3. Validação / Asserção
-		assertEquals (0-valor, conta.getSaldo());
+		assertEquals (0, conta.getSaldo());
 		assertEquals (valor , outraConta.getSaldo());
+	}
+	
+	@Test
+	void exception_deve_ser_disparada_caso_titular_seja_invalido() {
+		//1. Configuração
+		String nome = null;
+		String numero = "123-456";
+		
+		//2. Validação / Asserção
+		try {
+			Conta conta = new Conta(nome, numero);
+		}
+		catch (TitularNullException t) {
+			
+		}
+	}
+	
+	@Test
+	void exception_deve_ser_disparada_caso_Numero_seja_invalido() {
+		//1. Configuração
+		String nome = "Carlos";
+		String numero = null;
+		
+		//2. Validação / Asserção
+		try {
+			Conta conta = new Conta(nome, numero);
+		}
+		catch (NumeroContaException n) {
+			
+		}
+	}
+	
+	@Test
+	void exception_deve_ser_disparada_caso_saque_com_saldo_0() {
+		//1. Configuração
+		Conta conta = new Conta("João da Silva", "123-456");
+		double valor = 10;
+		
+		//2. Validação / Asserção
+		try {
+			conta.sacar(valor);
+		}
+		catch (SaldoZeroException s){
+			
+		}
+		
 	}
 }
